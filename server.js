@@ -10,5 +10,11 @@ app.listen(PORT, () =>console.log(`Server Running on port: http://localhost:${PO
 app.use('/articles', articleRouter)
 
 app.set('view engine', 'ejs')
+// create an object to pass at index.js
+const articles = [{
+    title: 'Test Articles',
+    createdAt: Date.now(),
+    description: 'description'
+}]
 
-app.get("/", (req, res) => res.render('index'));
+app.get("/", (req, res) => res.render('index', { articles: articles}));

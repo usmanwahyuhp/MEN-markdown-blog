@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Markdown Blog</title>
 </head>
 <body>
-    This is HTML
+    <div class="container">
+        <h1 class="mb-4">Blog Articles</h1>
+        <a href="/articles/new" class="btn btn-success">New Articles</a>
+
+        <% articles.forEach(article => { %>
+            <div class="card mt-4">
+                <%= article.title %>
+            </div>
+        <% }) %>
+    </div>
 </body>
 </html>
