@@ -13,8 +13,13 @@ app.set('view engine', 'ejs')
 // create an object to pass at index.js
 const articles = [{
     title: 'Test Articles',
-    createdAt: Date.now(),
+    createdAt: new Date(),
     description: 'description'
+},
+{
+    title: 'Test Articles 2',
+    createdAt: new Date(),
+    description: 'description 2'
 }]
 
-app.get("/", (req, res) => res.render('index', { articles: articles}));
+app.get("/", (req, res) => res.render('articles/index', { articles: articles}));

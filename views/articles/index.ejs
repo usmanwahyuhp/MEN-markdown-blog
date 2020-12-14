@@ -13,7 +13,18 @@
 
         <% articles.forEach(article => { %>
             <div class="card mt-4">
-                <%= article.title %>
+                <div class="card-body">
+                    <h4 class="card-title"><%= article.title %></h4>
+                    <div class="card-subtitle text-muted mb-2">
+                        <%= article.createdAt.toLocaleDateString() %>
+                    </div>
+                    <div class="card-text mb-2"><%= article.description %></div>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                    <a href="#" class="btn btn-info">Edit</a>
+                    <form class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
             </div>
         <% }) %>
     </div>
