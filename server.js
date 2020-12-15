@@ -10,10 +10,10 @@ mongoose.connect('mongodb://localhost/blog', {
 })
 
 app.listen(PORT, () =>console.log(`Server Running on port: http://localhost:${PORT}`));
-
-app.use('/articles', articleRouter)
-
 app.set('view engine', 'ejs')
+
+app.use(express.urlencoded({ extended: false }))
+
 // create an object to pass at index.js
 const articles = [{
     title: 'Test Articles',
@@ -27,3 +27,5 @@ const articles = [{
 }]
 
 app.get("/", (req, res) => res.render('articles/index', { articles: articles}));
+
+app.use('/articles', articleRouter)
