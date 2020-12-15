@@ -2,6 +2,7 @@
 const express = require('express');
 const articleRouter = require('./routes/articles.js');
 const mongoose = require('mongoose');
+const Article = require('./models/article');
 const app = express();
 const PORT = 5000;
 
@@ -15,17 +16,12 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
 // create an object to pass at index.js
-const articles = [{
-    title: 'Test Articles',
-    createdAt: new Date(),
-    description: 'description'
-},
-{
-    title: 'Test Articles 2',
-    createdAt: new Date(),
-    description: 'description 2'
-}]
 
-app.get("/", (req, res) => res.render('articles/index', { articles: articles}));
+app.get("/", async (req, res) => {
+  const articles = await Article.find().sort({
+    createdAt: 'desc'
+  })
+  res.render('articles/index', { articles: articles})
+});
 
 app.use('/articles', articleRouter)
