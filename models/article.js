@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const marked = require('marked');
+const createDomPurifiy = require('dompurify');
+const { JSDOM } = require('jsdom');
+const dompurify = createDomPurifiy(new JSDOM().window);
 const slugify = require('slugify');
 
 //table of database with the columns
@@ -23,6 +26,10 @@ const articleSchema = new mongoose.Schema({
       type: String,
       required: true,
       unique: true
+    },
+    sanitizedHtml: {
+      type: String,
+      required: true
     }
   })
 
@@ -31,6 +38,10 @@ const articleSchema = new mongoose.Schema({
       this.slug = slugify(this.title, { lower: true, strict: true })
     }
 
+    if (this.markdown) {
+      this.sanitizedHtml = dompurify.sanitize(marked(this.markdown))
+    }
+    
     next()
   })
 
